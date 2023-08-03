@@ -1,0 +1,68 @@
+# python3 koopman_train.py --config gf2_k.yaml
+work_dir: ./pt_120xsub/joint_k/l6  # path to save the result or save the model weight
+run_mode: train  # test or train
+weights: ./pt_120xsub/joint/l6/8493.pt  # load the model weight you saved
+freeze_weights: True  # freeze some weights you have set in main.py
+eval_interval: 5
+
+# feeder
+feeder: feeders.feeder_ntu.Feeder
+train_feeder_args:
+  data_path: gendata/ntu120/NTU120_XSub.npz
+  split: train
+  debug: False
+  random_choose: False
+  random_shift: False
+  random_move: False
+  window_size: 120
+  normalization: False
+  random_rot: True
+  p_interval: [0.5, 1]
+  data_mode: joint
+
+test_feeder_args:
+  data_path: gendata/ntu120/NTU120_XSub.npz
+  split: test  
+  debug: False
+  window_size: 120
+  p_interval: [0.95]
+  data_mode: joint
+
+# model
+model: model.st_gf.Model
+model_args:
+  len_parts: 6
+  num_frames: 120
+  num_joints: 25
+  num_classes: 120
+  num_heads: 3
+  kernel_size: [3, 5]
+  num_persons: 2
+  num_channels: 3
+  use_pes: True
+  koopman: t
+  #dataset: ntu
+  config: [[64,  64,  16], [64,  64,  16], 
+           [64,  128, 32], [128, 128, 32],
+           [128, 256, 64], [256, 256, 64], 
+           [256, 256, 64], [256, 256, 64]]
+
+#optim
+weight_decay: 0.0004
+base_lr: 0.1
+lr_decay_rate: 0.1
+save_epoch: 0
+eval_epoch: 5
+start_epoch: 0
+step: [5, 20, 30]
+warm_up_epoch: 1
+
+# training
+num_worker: 10
+device: [0, 1]
+#device: [0]
+cuda_visible_device: '0,1'
+batch_size: 64
+test_batch_size: 128
+num_epoch: 35
+nesterov: True

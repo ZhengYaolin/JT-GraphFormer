@@ -1,0 +1,58 @@
+work_dir: ./ucla/test/bone_motion/l8
+run_mode: test
+weights: "/home/ici/STTFormer/ucla/koopman_final/bone_motion/l8/8987.pt"
+save_score: True
+
+# feeder
+feeder: feeders.feeder_ucla.Feeder
+train_feeder_args:
+  data_path: bone_motion #joint bone joint_motion bone_motion
+  label_path: train
+  debug: False
+  random_choose: False
+  random_shift: False
+  random_move: False
+  window_size: 54
+  normalization: False
+  repeat: 5
+
+test_feeder_args:
+  data_path: bone_motion
+  window_size: 56
+  label_path: val
+  debug: False
+
+
+model: model.new.Model
+model_args:
+  len_parts: 8
+  num_frames: 56
+  num_joints: 20
+  num_classes: 10
+  num_heads: 3
+  kernel_size: [3, 5]
+  num_persons: 1
+  num_channels: 3
+  use_pes: True
+  koopman: s
+  dataset: ucla
+  config: [[64,  64,  16], [64,  64,  16], 
+           [64,  128, 32], [128, 128, 32],
+           [128, 256, 64], [256, 256, 64], 
+           [256, 256, 64], [256, 256, 64]]
+
+#optim
+weight_decay: 0.0002
+base_lr: 0.02
+lr_decay_rate: 0.1
+step: [15]
+warm_up_epoch: 1
+
+# training
+num_worker: 10
+device: [0, 1]
+#cuda_visible_device: '0,1'
+batch_size: 16
+test_batch_size: 128
+num_epoch: 30
+nesterov: True

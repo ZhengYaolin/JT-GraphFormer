@@ -1,0 +1,1 @@
+from model import gf2_new as st_gf
