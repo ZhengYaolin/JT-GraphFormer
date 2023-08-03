@@ -18,7 +18,7 @@ This section references the [CTR-GCN](https://github.com/Uason-Chen/CTR-GCN).
 2. Download the skeleton-only datasets:
    1. `nturgbd_skeletons_s001_to_s017.zip` (NTU RGB+D 60)
    2. `nturgbd_skeletons_s018_to_s032.zip` (NTU RGB+D 120)
-   3. Extract above files to `./data/nturgbd_raw`
+   3. Extract above files to `./gendata/nturgbd_raw`
 #### N-UCLA (NW-UCLA)
 1. Download dataset from [here](https://www.dropbox.com/s/10pcm4pksjy6mkq/all_sqe.zip?dl=0)
 2. Move `all_sqe` to `./gendata/n_ucla`
