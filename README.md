@@ -99,9 +99,8 @@ python koopman_train.py --config config/test.yaml
 Then you can run following command:
 ```
 # Example: ensemble four modalities on NTU RGB+D 120 cross subject
-python ensemble/ntu120xsub_ensemble.py --datasets ./gendata/ntu120/NTU120_XSub.npz --joint_dir ./pt_saved/pt_120xsub/joint --bone_dir ./pt_saved/pt_120xsub/bone --joint_motion_dir ./pt_saved/pt_120xsub/joint_motion --bone_motion_dir ./pt_saved/pt_120xsub/bone_motion
+python ensemble.py --datasets ./gendata/ntu120/NTU120_XSub.npz --joint_dir ./pt_saved/pt_120xsub/joint --bone_dir ./pt_saved/pt_120xsub/bone --joint_motion_dir ./pt_saved/pt_120xsub/joint_motion --bone_motion_dir ./pt_saved/pt_120xsub/bone_motion
 ```
-Of course, we recommend checking each ensemble.py before running or to set the default path manuallyit to prevent errors.
 
 ### Pretrained Models
 
