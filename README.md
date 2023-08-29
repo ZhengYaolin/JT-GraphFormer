@@ -1,5 +1,5 @@
-# ST-GraphFormer
-ST-GraphFormer: Effective Human Action Recognition with Spatio-Temporal Subgraph
+# JT-GraphFormer
+JT-GraphFormer: Spatio-Temporal Fusion for Human Action Recognition via Joint Trajectory Graph
 ## Acknowledgements
 This repository is based on [CTR-GCN](https://github.com/Uason-Chen/CTR-GCN) and [STTFormer](https://github.com/heleiqiu/STTFormer). Thanks to the original authors for their **outstanding** work!!!
 
