@@ -4,7 +4,7 @@ import numpy as np
 from .pos_embed import Pos_Embed
 
 with torch.no_grad():
-    # Spatio-Temporal Dijkstra Matrix (D)
+    # Dijkstra Matrix (D)
     ntu_pos = torch.tensor([[0, 1, 3, 4, 3, 4, 5, 6, 3, 4, 5, 6, 1, 2, 3, 4, 1, 2, 3, 4, 2, 7, 7, 7, 7],
                             [1, 0, 2, 3, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 1, 6, 6, 6, 6],
                             [3, 2, 0, 1, 2, 3, 4, 5, 2, 3, 4, 5, 4, 5, 6, 7, 4, 5, 6, 7, 1, 6, 6, 6, 6],
@@ -198,7 +198,7 @@ class Graphformer_Block(nn.Module):
             nn.BatchNorm2d(out_channels))
         self.ff_net = nn.Sequential(nn.Conv2d(out_channels, out_channels, 1), nn.BatchNorm2d(out_channels))
 
-        # ST-Graph Sequential Feature Aggregation (like TCN)
+        # JTG Sequential Feature Aggregation (like TCN)
         self.tcn = nn.Sequential(nn.Conv2d(out_channels, out_channels, (kernel_size[0], 1), padding=(padt, 0)),
                                  nn.BatchNorm2d(out_channels))
 
@@ -227,6 +227,6 @@ class Graphformer_Block(nn.Module):
         xs = self.relu(self.out_nets(xs) + x_ress)
         xs = self.relu(self.ff_net(xs) + x_ress)
 
-        # ST-Graph Sequential Feature Aggregation (TCN)
+        # JTG Sequential Feature Aggregation (TCN)
         xt = self.relu(self.tcn(xs) + self.rest(xs))
         return xt
