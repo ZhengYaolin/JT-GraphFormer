@@ -86,7 +86,7 @@ python koopman_train.py --config config/test.yaml
 - pt_saved/
   - pt_120xsub/
     - joint
-      - l2  # different amount of frames for ST-Graph
+      - l2  # different amount of frames for JTG
         - score.pkl
       - l4
       ...
